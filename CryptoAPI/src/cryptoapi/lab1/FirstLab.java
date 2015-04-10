@@ -16,16 +16,16 @@ public class FirstLab {
 
     public static void showProviders1() {
         for (Provider provider : Security.getProviders()) {
-            System.out.println("Provider: " + provider + "\ninfo: " + provider.getInfo());
+            System.out.println("Provider name:" + provider.getName()
+                    + "\nProvider version: " + provider.getVersion()
+                    + "\nProvider info: " + provider.getInfo()+"\n");
+            
             int i = 0;
-
-//            for (String key : provider.stringPropertyNames()) {
-//                System.out.println("\tKey:  " + key + "\t" + provider.getProperty(key));
-//            }
+            System.out.println("Algorithms:");
             for (Provider.Service service : provider.getServices()) {
                 i++;
-
-                System.out.println(i + "  Algorithm: " +service.getAlgorithm()+"\tType "+service.getType());
+                
+                System.out.println(i + " Name: " + service.getAlgorithm() + "\tType " + service.getType());
             }
             System.out.println("\n\n");
         }
