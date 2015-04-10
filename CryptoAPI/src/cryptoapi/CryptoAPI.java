@@ -5,6 +5,8 @@
  */
 package cryptoapi;
 
+import cryptoapi.lab1.FirstLab;
+
 /**
  *
  * @author mchukDM
@@ -15,8 +17,7 @@ public class CryptoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        cryptoapi.lab1.FirstLab.showProviders1();
+        FirstLab.showProviders1();
     }
     
 }
