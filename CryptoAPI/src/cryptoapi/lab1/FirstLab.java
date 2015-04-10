@@ -13,7 +13,7 @@ import java.security.Security;
  * @author mchukDM
  */
 public class FirstLab {
-    private static void showProviders1() {
+    public static void showProviders1() {
         for (Provider provider : Security.getProviders()) {
             System.out.println("Provider: " + provider + "\ninfo: " + provider.getInfo());
             int i = 0;
@@ -23,6 +23,7 @@ public class FirstLab {
             //}
             for (Provider.Service service : provider.getServices()) {
                 i++;
+                
                 System.out.println(i + "  Algorithm: " + service.getAlgorithm());
             }
             System.out.println("\n\n");

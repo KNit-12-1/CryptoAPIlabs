@@ -16,7 +16,7 @@ public class CryptoAPI {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("hi git");
+        cryptoapi.lab1.FirstLab.showProviders1();
     }
     
 }
