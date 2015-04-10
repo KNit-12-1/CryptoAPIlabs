@@ -19,7 +19,7 @@ public class FirstLab {
             System.out.println("Provider name:" + provider.getName()
                     + "\nProvider version: " + provider.getVersion()
                     + "\nProvider info: " + provider.getInfo()+"\n");
-            
+
             int i = 0;
             System.out.println("Algorithms:");
             for (Provider.Service service : provider.getServices()) {
