@@ -35,7 +35,6 @@ class GenerateSignature {
 
     protected static void generate() {
         try {
-
             KeyPairGenerator keyGen;
             keyGen = KeyPairGenerator.getInstance("DSA", "SUN");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
