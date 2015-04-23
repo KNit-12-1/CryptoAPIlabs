@@ -162,8 +162,8 @@ public class SymmetricEncryptor {
     /**
      * Функция используемая для записи зашифрованных данных в файл на диск
      *
-     * @param input - файл, из которого будут считыватся исходние данные
-     * @param output - файл, куда будут записаны зашифрованные данные
+     * @param input файл, из которого будут считыватся исходние данные
+     * @param output файл, куда будут записаны зашифрованные данные
      */
     public void writeEncryptedFile(File input, File output) {
         try {

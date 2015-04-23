@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class CryptoAPI {
 
     /**
-     * @param args the command line arguments
+     * @param args аргументы командной строки
      */
     public static void main(String[] args) {
         System.out.print("Введите номер лабораторной, или 0 для выхода:");
