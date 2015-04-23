@@ -1,19 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cryptoapi.lab3;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import java.io.File;
+import org.apache.commons.codec.binary.Hex;
 
 /**
  *
@@ -21,43 +9,42 @@ import javax.crypto.SecretKey;
  */
 public class ThirdLab {
 
-    public static void main(String[] argv) {
+    public static void startLab3() {
 
-        try {
+        // create the input.txt file in the current directory before continuing
+        File input = new File("input.txt");
+        File eoutput = new File("encrypted.aes");
+        File doutput = new File("decrypted.txt");
+        String iv;
+        String salt;
 
-            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            SecretKey myDesKey = keygenerator.generateKey();
+        System.out.println("ФАЗА_1");
+        SymmetricEncryptor en = new SymmetricEncryptor("test_password");
 
-            Cipher desCipher;
+        /*
+         * setup encryption cipher using password. print out iv and salt
+         */
+        en.setupEncrypt();
+        iv = Hex.encodeHexString(en.getInitVec()).toUpperCase();
+        salt = Hex.encodeHexString(en.getSalt()).toUpperCase();
 
-            // Create the cipher 
-            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        /*
+         * write out encrypted file
+         */
+        en.writeEncryptedFile(input, eoutput);
+        System.out.println("message--> Зашифрованные данные записаны в файл: " + eoutput.getName());
 
-            // Initialize the cipher for encryption
-            desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
+        System.out.println("\nФАЗА_2");
+        /*
+         * decrypt file
+         */
+        SymmetricEncryptor dc = new SymmetricEncryptor("test_password");
+        dc.setupDecrypt(iv, salt);
 
-            //sensitive information
-            byte[] text = "No body can see me".getBytes();
-
-            System.out.println("Original text               : " + new String(text));
-            System.out.println("Original text [Byte Format] : " + text);
-            
-            // Encrypt the text
-            byte[] textEncrypted = desCipher.doFinal(text);
-
-            System.out.println("Text Encryted : " +textEncrypted);
-
-            // Initialize the same cipher for decryption
-            desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
-
-            // Decrypt the text
-            byte[] textDecrypted = desCipher.doFinal(textEncrypted);
-
-            System.out.println("Text Decryted : " + new String(textDecrypted));
-
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
-        }
-
+        /*
+         * write out decrypted file
+         */
+        dc.readEncryptedFile(eoutput, doutput);
+        System.out.println("message--> Расшифрованные данные записаны в файл:" + doutput.getName());
     }
 }

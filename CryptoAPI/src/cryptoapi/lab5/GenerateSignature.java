@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cryptoapi.lab5;
 
 /**
@@ -13,13 +8,12 @@ import java.io.*;
 import java.security.*;
 
 /**
- *
  * Класс используемый создания электронной цифровой подписи
  */
 class GenerateSignature {
 
-    //сохранение байтового массива в файл
     /**
+     * сохранение байтового массива в файл
      *
      * @param info данные для записи в файл
      * @param filename название файла
