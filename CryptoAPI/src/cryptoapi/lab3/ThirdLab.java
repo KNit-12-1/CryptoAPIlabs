@@ -12,9 +12,9 @@ public class ThirdLab {
     public static void startLab3() {
 
         // create the input.txt file in the current directory before continuing
-        File input = new File("input.txt");
-        File eoutput = new File("encrypted.aes");
-        File doutput = new File("decrypted.txt");
+        File input = new File(System.getProperty("user.dir") + "/lab3_files/input.txt");
+        File eoutput = new File(System.getProperty("user.dir") + "/lab3_files/encrypted.aes");
+        File doutput = new File(System.getProperty("user.dir") + "/lab3_files/decrypted.txt");
         String iv;
         String salt;
 
