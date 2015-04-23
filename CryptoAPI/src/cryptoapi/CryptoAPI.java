@@ -6,6 +6,10 @@
 package cryptoapi;
 
 import cryptoapi.lab1.FirstLab;
+import cryptoapi.lab2.SecondLab;
+import cryptoapi.lab5.FifthLab;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +21,7 @@ public class CryptoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FirstLab.showProviders1();
+        FifthLab.generateAndVerifySignature();
     }
     
 }
