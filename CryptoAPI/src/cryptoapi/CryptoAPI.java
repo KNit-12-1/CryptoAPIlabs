@@ -16,10 +16,11 @@ public class CryptoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.print("Введите номер лабораторной:");
+        System.out.print("Введите номер лабораторной, или 0 для выхода:");
         Scanner scan = new Scanner(System.in);
         int input=0;
         do {
+            
             input = scan.nextInt();
             switch (input) {
                 case 1:
@@ -44,6 +45,7 @@ public class CryptoAPI {
                 case 0:
                     break;
             }
+            System.out.print("\nВведите номер лабораторной, или 0 для выхода:");
         } while (input!=0);
         //FifthLab.generateAndVerifySignature();
     }

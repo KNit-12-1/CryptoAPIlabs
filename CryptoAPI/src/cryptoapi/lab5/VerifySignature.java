@@ -28,7 +28,7 @@ class VerifySignature {
             info = new byte[0];
         }
         return (info);
-    }// copyFromFile ()
+    }
 
     /**
      * проверка подлинности подписи и данных
@@ -36,7 +36,7 @@ class VerifySignature {
     protected static void verify() {
         try {
             /* Получение encoded public key из файла "pubkey" */
-            byte[] encKey = readFromFile("pubkey.key");
+            byte[] encKey = readFromFile(System.getProperty("user.dir") + "/lab5_files/pubkey.key");
 
             /* Создание спецификации ключа */
             X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encKey);
@@ -44,12 +44,12 @@ class VerifySignature {
             KeyFactory keyFactory = KeyFactory.getInstance("DSA", "SUN");
             PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);
             /* Чтение подписи из файла "signature" */
-            byte[] sigToVerify = readFromFile("signature.sig");
+            byte[] sigToVerify = readFromFile(System.getProperty("user.dir") + "/lab5_files/signature.sig");
             /* Создание объекта класса Signature и инициализация с помощью открытого ключа    */
             Signature sig = Signature.getInstance("SHA1withDSA", "SUN");
             sig.initVerify(pubKey);
             /* Чтение данных из файла "data" и вызов метода update() */
-            FileInputStream datafis = new FileInputStream("data.txt");
+            FileInputStream datafis = new FileInputStream(System.getProperty("user.dir") + "/lab5_files/data.txt");
             BufferedInputStream bufin = new BufferedInputStream(datafis);
             byte[] buffer = new byte[1024];
             int len;
@@ -66,5 +66,5 @@ class VerifySignature {
             System.err.println("Caught exception " + e.toString()
             );
         }
-    }// main() 
-}// class VerifySignature 
+    }
+}

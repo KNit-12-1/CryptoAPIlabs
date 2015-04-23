@@ -41,7 +41,7 @@ class GenerateSignature {
             /* Инициализация частным ключом */
             dsa.initSign(priv);
             /* Чтение данных из файла "data.txt". Вызов метода update() */
-            FileInputStream fis = new FileInputStream("data.txt");
+            FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/lab5_files/data.txt");
             try (BufferedInputStream bufin = new BufferedInputStream(fis)) {
                 byte[] buffer = new byte[1024];
                 int len;
@@ -51,18 +51,18 @@ class GenerateSignature {
                 }
             }
             /* Генерация подписи */
-            System.out.println("Генерация подписи");
+            System.out.println("message--> Генерация подписи");
             byte[] realSig = dsa.sign();
             /* Сохранение подписи в файл "signature.sig" */
-            saveToFile(realSig, "signature.sig");
+            saveToFile(realSig, System.getProperty("user.dir") + "/lab5_files/signature.sig");
             /* Сохранение открытого ключа в файл "pubkey.key" */
             byte[] key = pub.getEncoded();
-            saveToFile(key, "pubkey.key");
+            saveToFile(key, System.getProperty("user.dir") + "/lab5_files/pubkey.key");
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeyException | IOException | SignatureException e) {
             System.err.println(
                     "Caught exception " + e.toString()
             );
         }
-    }// main()
-}// class GenerateSignature 
+    }
+}
 
