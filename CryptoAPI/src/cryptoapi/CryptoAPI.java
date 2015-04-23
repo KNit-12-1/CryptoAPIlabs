@@ -18,28 +18,33 @@ public class CryptoAPI {
     public static void main(String[] args) {
         System.out.print("Введите номер лабораторной:");
         Scanner scan = new Scanner(System.in);
-        switch (scan.nextInt()) {
-            case 1:
-                System.out.println("Лабораторная №1\nРабота с криптопровайдерами");
-                FirstLab.startLab1();
-                break;
-            case 2:
-                System.out.println("Лабораторная №2\nГенерация ключа симметричного шифрования на основе пароля");
-                SecondLab.startLab2();
-                break;
-            case 3:
-                System.out.println("Лабораторная №3\nСимметричная криптосистема. Шифрование");
-                ThirdLab.startLab3();
-                break;
-            case 4:
-                System.out.println("Лабораторная №4\nСимметричная криптосистема. Генерация имитовставки");
-                break;
-            case 5:
-                System.out.println("Лабораторная №5\nВыработка и проверка электронной цифровой подписи");
-                FifthLab.startLab5();
-                break;
-        }
-
+        int input=0;
+        do {
+            input = scan.nextInt();
+            switch (input) {
+                case 1:
+                    System.out.println("Лабораторная №1\nРабота с криптопровайдерами");
+                    FirstLab.startLab1();
+                    break;
+                case 2:
+                    System.out.println("Лабораторная №2\nГенерация ключа симметричного шифрования на основе пароля");
+                    SecondLab.startLab2();
+                    break;
+                case 3:
+                    System.out.println("Лабораторная №3\nСимметричная криптосистема. Шифрование");
+                    ThirdLab.startLab3();
+                    break;
+                case 4:
+                    System.out.println("Лабораторная №4\nСимметричная криптосистема. Генерация имитовставки");
+                    break;
+                case 5:
+                    System.out.println("Лабораторная №5\nВыработка и проверка электронной цифровой подписи");
+                    FifthLab.startLab5();
+                    break;
+                case 0:
+                    break;
+            }
+        } while (input!=0);
         //FifthLab.generateAndVerifySignature();
     }
 
