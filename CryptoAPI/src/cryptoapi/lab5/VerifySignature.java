@@ -25,12 +25,9 @@ class VerifySignature {
      */
     private static byte[] readFromFile(String fileName) {
         byte[] info;
-        try {
-            FileInputStream fis
-                    = new FileInputStream(fileName);
+        try (FileInputStream fis = new FileInputStream(fileName)) {
             info = new byte[fis.available()];
             fis.read(info);
-            fis.close();
         } catch (Exception e) {
             System.err.println("Caught exception " + e.toString());
             info = new byte[0];
@@ -58,8 +55,7 @@ class VerifySignature {
             sig.initVerify(pubKey);
             /* Чтение данных из файла "data" и вызов метода update() */
             FileInputStream datafis = new FileInputStream("data.txt");
-            BufferedInputStream bufin
-                    = new BufferedInputStream(datafis);
+            BufferedInputStream bufin = new BufferedInputStream(datafis);
             byte[] buffer = new byte[1024];
             int len;
             while (bufin.available() != 0) {
@@ -68,6 +64,7 @@ class VerifySignature {
             }
             bufin.close();
             /* Верификация */
+            System.out.println("Проверка подписи");
             boolean verifies = sig.verify(sigToVerify);
             System.out.println("Signature verifies: " + verifies);
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeySpecException | InvalidKeyException | IOException | SignatureException e) {

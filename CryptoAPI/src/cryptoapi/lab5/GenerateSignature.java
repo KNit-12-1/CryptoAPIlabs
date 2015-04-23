@@ -24,25 +24,20 @@ class GenerateSignature {
      * @param info данные для записи в файл
      * @param filename название файла
      */
-    private static void saveToFile(byte[] info,
-            String filename) {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
+    private static void saveToFile(byte[] info, String filename) {
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
             fos.write(info);
-            fos.close();
         } catch (Exception e) {
-            System.err.println(
-                    "Caught exception "
-                    + e.toString()
+            System.err.println("Caught exception " + e.toString()
             );
         }
     }// saveToFile ()
 
     protected static void generate() {
         try {
-            /* Генерация ключей */
-            KeyPairGenerator keyGen
-                    = KeyPairGenerator.getInstance("DSA", "SUN");
+
+            KeyPairGenerator keyGen;
+            keyGen = KeyPairGenerator.getInstance("DSA", "SUN");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
             keyGen.initialize(1024, random);
             KeyPair pair = keyGen.generateKeyPair();
@@ -63,10 +58,11 @@ class GenerateSignature {
                 }
             }
             /* Генерация подписи */
+            System.out.println("Генерация подписи");
             byte[] realSig = dsa.sign();
-            /* Сохранение подписи в файл "signature" */
+            /* Сохранение подписи в файл "signature.sig" */
             saveToFile(realSig, "signature.sig");
-            /* Сохранение открытого ключа в файл "pubkey" */
+            /* Сохранение открытого ключа в файл "pubkey.key" */
             byte[] key = pub.getEncoded();
             saveToFile(key, "pubkey.key");
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeyException | IOException | SignatureException e) {
