@@ -313,7 +313,7 @@ public class Crypto {
      * adding main() for usage demonstration. With member vars, some of the
      * locals would not be needed
      */
-    public static void main(String[] args) {
+    public static void startLab2() {
 
         // create the input.txt file in the current directory before continuing
         File input = new File("input.txt");
