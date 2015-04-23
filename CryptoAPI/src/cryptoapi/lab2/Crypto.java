@@ -330,21 +330,7 @@ public class Crypto {
             en.setupEncrypt();
             iv = Hex.encodeHexString(en.getInitVec()).toUpperCase();
             salt = Hex.encodeHexString(en.getSalt()).toUpperCase();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidParameterSpecException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (InvalidKeyException | NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidParameterSpecException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -354,11 +340,7 @@ public class Crypto {
         try {
             en.WriteEncryptedFile(input, eoutput);
             System.out.printf("File encrypted to " + eoutput.getName() + "\niv:" + iv + "\nsalt:" + salt + "\n\n");
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IllegalBlockSizeException | BadPaddingException | IOException e) {
             e.printStackTrace();
         }
 
@@ -369,17 +351,7 @@ public class Crypto {
         Crypto dc = new Crypto("mypassword");
         try {
             dc.setupDecrypt(iv, salt);
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (DecoderException e) {
+        } catch (InvalidKeyException | NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidAlgorithmParameterException | DecoderException e) {
             e.printStackTrace();
         }
 
@@ -389,11 +361,7 @@ public class Crypto {
         try {
             dc.ReadEncryptedFile(eoutput, doutput);
             System.out.println("decryption finished to " + doutput.getName());
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IllegalBlockSizeException | BadPaddingException | IOException e) {
             e.printStackTrace();
         }
     }
