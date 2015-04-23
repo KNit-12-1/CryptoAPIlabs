@@ -50,18 +50,18 @@ class VerifySignature {
             sig.initVerify(pubKey);
             /* Чтение данных из файла "data" и вызов метода update() */
             FileInputStream datafis = new FileInputStream(System.getProperty("user.dir") + "/lab5_files/data.txt");
-            BufferedInputStream bufin = new BufferedInputStream(datafis);
-            byte[] buffer = new byte[1024];
-            int len;
-            while (bufin.available() != 0) {
-                len = bufin.read(buffer);
-                sig.update(buffer, 0, len);
+            try (BufferedInputStream bufin = new BufferedInputStream(datafis)) {
+                byte[] buffer = new byte[1024];
+                int len;
+                while (bufin.available() != 0) {
+                    len = bufin.read(buffer);
+                    sig.update(buffer, 0, len);
+                }
             }
-            bufin.close();
             /* Верификация */
-            System.out.println("Проверка подписи");
+            System.out.println("message--> Проверка подписи");
             boolean verifies = sig.verify(sigToVerify);
-            System.out.println("Signature verifies: " + verifies);
+            System.out.println("message--> Signature verifies: " + verifies);
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeySpecException | InvalidKeyException | IOException | SignatureException e) {
             System.err.println("Caught exception " + e.toString()
             );
