@@ -13,7 +13,7 @@ public class FifthLab {
         
         
         Scanner scan = new Scanner(System.in);
-        System.out.println("message--> Нажмите любую клавишу для продолжения: ");
+        System.out.println("message--> Нажмите 1 для продолжения: ");
         int input = scan.nextInt();
         
         VerifySignature.verify();
