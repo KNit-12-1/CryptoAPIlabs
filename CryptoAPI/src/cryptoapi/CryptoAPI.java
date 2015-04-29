@@ -3,6 +3,7 @@ package cryptoapi;
 import cryptoapi.lab1.FirstLab;
 import cryptoapi.lab2.SecondLab;
 import cryptoapi.lab3.ThirdLab;
+import cryptoapi.lab4.ForthLab;
 import cryptoapi.lab5.FifthLab;
 import java.util.Scanner;
 
@@ -37,6 +38,7 @@ public class CryptoAPI {
                     break;
                 case 4:
                     System.out.println("Лабораторная №4\nСимметричная криптосистема. Генерация имитовставки");
+                    ForthLab.startLab4();
                     break;
                 case 5:
                     System.out.println("Лабораторная №5\nВыработка и проверка электронной цифровой подписи");
