@@ -49,7 +49,6 @@ public class CryptoAPI {
             }
             System.out.print("\nВведите номер лабораторной, или 0 для выхода:");
         } while (input!=0);
-        //FifthLab.generateAndVerifySignature();
     }
 
 }
