@@ -5,7 +5,21 @@ package cryptoapi.lab5;
  * @author mchukDM
  */
 import java.io.*;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;/*класс является простым держателем для 
+                            пары ключей (открытый ключ и закрытый ключ)*/
+import java.security.KeyPairGenerator;/*класс является классом механизма, 
+                                        используемым, чтобы генерировать 
+                                        пар открытых и закрытых ключей.*/
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.Signature;/*класс является классом механизма, разработанным,
+                                чтобы обеспечить функциональность криптографического 
+                                алгоритма цифровой подписи*/
+import java.security.SignatureException;
 
 /**
  * Класс используемый создания электронной цифровой подписи
@@ -58,6 +72,7 @@ class GenerateSignature {
             /* Сохранение открытого ключа в файл "pubkey.key" */
             byte[] key = pub.getEncoded();
             saveToFile(key, System.getProperty("user.dir") + "/lab5_files/pubkey.key");
+            System.out.println("message--> Подпись сгенерирована");
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeyException | IOException | SignatureException e) {
             System.err.println(
                     "Caught exception " + e.toString()

@@ -15,9 +15,13 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.KeyGenerator;
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
+import javax.crypto.KeyGenerator;/*Ключевой генератор используется, чтобы 
+                                   генерировать секретные ключи для 
+                                   симметричных алгоритмов.*/
+import javax.crypto.Mac;/*Код аутентификации сообщений (MAC) 
+                          обеспечивает способ проверить целостность информации, 
+                          переданной или сохраненный в ненадежном носителе*/
+import javax.crypto.SecretKey;/*класс - генератор случайных чисел*/
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -37,13 +41,13 @@ public class MAC {
      */
     public void createMAC() {
         try {
-            System.out.println("message--> Generating MAC key and code files..");
+            System.out.println("message--> Генерация ключа имитовставки..");
 
             KeyGenerator keygen = KeyGenerator.getInstance("HmacMD5");
             SecretKey macKey = keygen.generateKey();
 
             byte[] keyBytes = macKey.getEncoded();
-
+            /*запись ключа имитовставки в файл*/
             try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/lab4_files/mac_key.txt"))) {
                 out.write(keyBytes);
                 out.flush();
@@ -68,7 +72,7 @@ public class MAC {
 
             theMac.reset();
 
-            System.out.println("message--> Done!");
+            System.out.println("message--> ФАЗА_1 окончена");
         } catch (NoSuchAlgorithmException | InvalidKeyException ex) {
             Logger.getLogger(MAC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -84,7 +88,7 @@ public class MAC {
     public void verifyMAC() {
         BufferedInputStream in = null;
         try {
-            System.out.println("message--> Calculating MAC and comparing to MAC from sender...");
+            System.out.println("message--> Расчет имитовставки и сравнение с имитовставкой отправителя ...");
             in = new BufferedInputStream(new FileInputStream(System.getProperty("user.dir") + "/lab4_files/mac_key.txt"));
             byte[] keyBytes = new byte[in.available()];
             in.read(keyBytes);
@@ -109,23 +113,23 @@ public class MAC {
             boolean macsAgree = true;
             if (calculatedMacCode.length != calculatedMacCode.length) {
                 macsAgree = false;
-                System.out.println("message--> Sender MAC and calculated MAC are not the same.");
+                System.out.println("message--> Имитовставка отправителя не совпадает с рассчитаной имитовставкой");
             } else {
 
                 for (int i = 0; i < senderMacCode.length; i++) {
                     if (senderMacCode[i] != calculatedMacCode[i]) {
                         macsAgree = false;
-                        System.out.println("message--> Sender MAC and calculated MAC are different. "
-                                + "Message cannotbe authenticated.");
+                        System.out.println("message--> Имитовставка отправителя и рассчитаная имитовставка отличаются. "
+                                + "Сообщение не может быть подтверждено!!!");
                         break;
 
                     }
                 }
             }
             if (macsAgree) {
-                System.out.println("message--> Message authenticated successfully.");
+                System.out.println("message--> Сообщение подтверждено!!!");
             }    // if
-            System.out.println("message--> Done!");
+            System.out.println("message--> ФАЗА_2 окончена");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MAC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | NoSuchAlgorithmException | InvalidKeyException ex) {
@@ -138,4 +142,4 @@ public class MAC {
             }
         }
     }
-}//
+}

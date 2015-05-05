@@ -9,14 +9,14 @@ import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.KeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.Cipher;
+import javax.crypto.Cipher;//обеспечивает функциональность криптографического шифра, используемого для шифрования и дешифрования
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.binary.Hex;
+import javax.crypto.SecretKeyFactory;//фабрика для секретных ключей.
+import javax.crypto.spec.IvParameterSpec;//класс определяет вектор инициализации (IV)
+import javax.crypto.spec.PBEKeySpec;//класс определяет ключ DES.
+import javax.crypto.spec.SecretKeySpec;//Этот класс определяет секретный ключ независимым от провайдера способом.
+import org.apache.commons.codec.binary.Hex;//Преобразует шестнадцатеричные строки
 
 /**
  *
@@ -32,7 +32,10 @@ public class SecretKeyGenerator {
     private final int ITERATIONS = 65536;
     private final int MAX_FILE_BUF = 1024;
     private Cipher mEcipher = null;
-
+    /**
+     * 
+     * @param pass пароль, по которому будет генерироваться ключ
+     */
     public SecretKeyGenerator(String pass) {
         mPassword = pass;
         generateKey();
@@ -43,7 +46,7 @@ public class SecretKeyGenerator {
      * SecureRandom(). Секретный ключ шифрования создается вместе с
      * инициализацией vectory
      */
-    private final void generateKey() {
+    private void generateKey() {
         try {
             SecretKeyFactory factory = null;
             SecretKey secretKey = null;
@@ -53,15 +56,12 @@ public class SecretKeyGenerator {
             logMessage("Сгенерированая соль сгенерирована:" + Hex.encodeHexString(mSalt));
             factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
-            /* Формирование ключа, из входного пароля и соли.
-             *
-             */
+            /* Формирование ключа, из входного пароля и соли.*/
             KeySpec spec = new PBEKeySpec(mPassword.toCharArray(), mSalt, ITERATIONS, KEYLEN_BITS);
             secretKey = factory.generateSecret(spec);
             SecretKey secret = new SecretKeySpec(secretKey.getEncoded(), "AES");
 
-            /* Создание объекта шифрования
-             */
+            /* Создание объекта шифрования*/
             mEcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             mEcipher.init(Cipher.ENCRYPT_MODE, secret);
             AlgorithmParameters params = mEcipher.getParameters();

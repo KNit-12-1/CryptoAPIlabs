@@ -9,24 +9,28 @@ import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.SecureRandom;//класс - генератор случайных чисел
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.InvalidParameterSpecException;
-import java.security.spec.KeySpec;
+import java.security.spec.KeySpec;/* интерфейс исспользуемый для групировки и 
+                                  обеспечения безопасности типов 
+                                  для всех ключевых спецификаций*/
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.IllegalBlockSizeException;
+import org.apache.commons.codec.DecoderException;
+import javax.crypto.Cipher;/*обеспечивает функциональность криптографического шифра, 
+используемого для шифрования и дешифрования*/
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
+import javax.crypto.SecretKeyFactory;//фабрика для секретных ключей.
+import javax.crypto.spec.IvParameterSpec;//класс определяет вектор инициализации (IV)
+import javax.crypto.spec.PBEKeySpec;//класс определяет ключ DES.
+import javax.crypto.spec.SecretKeySpec;/*Этот класс определяет секретный ключ 
+                                        независимым от провайдера способом.*/
+import org.apache.commons.codec.binary.Hex;//Преобразует шестнадцатеричные строки
 
 /**
  *

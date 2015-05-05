@@ -6,9 +6,17 @@ package cryptoapi.lab5;
  */
 /* Верификация DSA-подписи */
 import java.io.*;
-import java.security.*;
-
-import java.security.spec.*;
+import java.security.KeyFactory;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PublicKey;
+import java.security.Signature;/*класс является классом механизма, разработанным,
+                                чтобы обеспечить функциональность криптографического 
+                                алгоритма цифровой подписи*/
+import java.security.SignatureException;
 
 class VerifySignature {
 
@@ -61,7 +69,7 @@ class VerifySignature {
             /* Верификация */
             System.out.println("message--> Проверка подписи");
             boolean verifies = sig.verify(sigToVerify);
-            System.out.println("message--> Signature verifies: " + verifies);
+            System.out.println("message--> Подпись подтверждена: " + verifies);
         } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeySpecException | InvalidKeyException | IOException | SignatureException e) {
             System.err.println("Caught exception " + e.toString()
             );
